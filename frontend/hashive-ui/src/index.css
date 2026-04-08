@@ -1,0 +1,108 @@
+@import "tailwindcss";
+
+/* =========================
+   DESIGN TOKENS (TAILWIND V4)
+   ========================= */
+:root {
+  --color-accent: #c8ff57;
+  --color-surface: #0a0a0a;
+  --color-panel: #111111;
+  --color-border: #2a2a2a;
+  --color-muted: #777777;
+  --color-text: #ffffff;
+  --color-text-dim: #aaaaaa;
+  --color-void: #000000;
+  --color-danger: #ff4d4d;
+  --color-warn: #ffa502;
+  --color-info: #4cc9f0;
+}
+
+/* Map to Tailwind */
+@theme {
+  --color-accent: var(--color-accent);
+  --color-surface: var(--color-surface);
+  --color-panel: var(--color-panel);
+  --color-border: var(--color-border);
+  --color-muted: var(--color-muted);
+  --color-text: var(--color-text);
+  --color-text-dim: var(--color-text-dim);
+  --color-void: var(--color-void);
+  --color-danger: var(--color-danger);
+  --color-warn: var(--color-warn);
+  --color-info: var(--color-info);
+}
+
+/* =========================
+   GLOBAL BASE
+   ========================= */
+body {
+  background: #000;
+  color: white;
+  font-family: "Space Mono", monospace;
+}
+
+/* =========================
+   NEO BRUTALISM UTILITIES
+   ========================= */
+
+/* Brutal shadow */
+.shadow-brutal {
+  box-shadow: 6px 6px 0px #c8ff57;
+}
+
+.shadow-brutal-muted {
+  box-shadow: 4px 4px 0px #2a2a2a;
+}
+
+/* Hover push effect */
+.brutal-hover {
+  transition: all 0.1s ease;
+}
+.brutal-hover:hover {
+  transform: translate(3px, 3px);
+  box-shadow: none;
+}
+
+/* Grid background */
+.grid-bg {
+  background-image: linear-gradient(#111 1px, transparent 1px),
+                    linear-gradient(90deg, #111 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Drop zone */
+.drop-zone-active {
+  border-color: #c8ff57 !important;
+  background: rgba(200,255,87,0.05);
+}
+
+/* Cursor blink */
+.cursor-blink::after {
+  content: "_";
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* Animations */
+.animate-slide-in {
+  animation: slideIn 0.4s ease forwards;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fonts */
+.font-display {
+  font-family: "Orbitron", sans-serif;
+}

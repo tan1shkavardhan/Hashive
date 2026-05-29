@@ -11,16 +11,23 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    if (token) {
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
-      axios.get(`${API}/auth/me`)
-        .then(r => setUser(r.data))
-        .catch(() => { setToken(null); localStorage.removeItem('hashive_token') })
-        .finally(() => setLoading(false))
-    } else {
-      setLoading(false)
-    }
-  }, [token])
+  const storedToken = localStorage.getItem('hashive_token')
+
+  if (storedToken) {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${storedToken}`
+
+    axios.get(`${API}/auth/me`)
+      .then(r => setUser(r.data))
+      .catch(err => {
+        console.log("AUTH ERROR:", err)
+        localStorage.removeItem('hashive_token')
+        setUser(null)
+      })
+      .finally(() => setLoading(false))
+  } else {
+    setLoading(false)
+  }
+}, [])
 
   const login = async (username, password) => {
     const form = new FormData()
@@ -29,11 +36,7 @@ export function AuthProvider({ children }) {
     const r = await axios.post(`${API}/auth/login`, form)
     const t = r.data.access_token
     localStorage.setItem('hashive_token', t)
-    axios.defaults.headers.common['Authorization'] = `Bearer ${t}`
-    setToken(t)
-    const me = await axios.get(`${API}/auth/me`)
-    setUser(me.data)
-    return me.data
+    window.location.href="/dashboard"
   }
 
   const register = async (username, email, password) => {

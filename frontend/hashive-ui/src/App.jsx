@@ -53,7 +53,7 @@ export default function App() {
             <Layout />
           </PrivateRoute>
         }>
-          <Route index element={<Dashboard />} />
+          <Route path="dashboard" element={<Dashboard />} />
           <Route path="files" element={<Files />} />
           <Route path="analytics" element={<Analytics />} />
         </Route>
